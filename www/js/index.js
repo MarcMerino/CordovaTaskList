@@ -27,29 +27,34 @@ let addTaskButton = $(".buttonTask").click(function(){
 
 addOnClickListeners();
 
+function getStructure() {
+    if (localStorage.getItem("listEntries") != null) {
+        localStorage.getItem("listEntries").li.forEach(i => {
+            addTask(i);
+        });
+    }
+}
+
 function addOnClickListeners() {
     $(".close").click(function(){
         $(this).parent().remove()
+        $("ul").listview('refresh');
     });
 }
 
-function addTask() {
-    let li = document.createElement("li");
-    let taskTitle = $(".inputTask")[0].value;
+function addTask(element) {
+    if (element == null) {
+        let value = $(".inputTask")[0].value;
+        if (value != "") {
+            $("ul").append('<li>' + value + '<span class="close">x</span></li>')
+            $("ul").listview('refresh');
 
-    if (taskTitle != "") {
-        let t = document.createTextNode(taskTitle);
-        li.className = "item";
-        li.appendChild(t);
+            localStorage.setItem("listEntries", JSON.stringify({"li": $("ul").children().toArray().firstChild.data}))
 
-        let span = document.createElement("span");
-        let txt = document.createTextNode("x");
-        span.className = "close";
-        span.appendChild(txt);
-        li.appendChild(span);
-
-        list.appendChild(li);
-
-        addOnClickListeners();
+            addOnClickListeners();
+        }
+    } else {
+        list.appendChild(element);
     }
+    
 }
