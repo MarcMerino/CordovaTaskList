@@ -21,32 +21,35 @@
 // See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
 
 let list = $("ul")[0];
+let addTaskButton = $(".buttonTask").click(function(){
+    addTask();
+});
 
 addOnClickListeners();
 
 function addOnClickListeners() {
     $(".close").click(function(){
-        console.log("CLOSEEED!");
+        $(this).parent().remove()
     });
 }
 
-addTask();
-addTask();
-addTask();
-
-
 function addTask() {
     let li = document.createElement("li");
-    let t = document.createTextNode("inputValue");
-    li.appendChild(t);
-  
-    let span = document.createElement("span");
-    let txt = document.createTextNode("x");
-    span.className = "close";
-    span.appendChild(txt);
-    li.appendChild(span);
+    let taskTitle = $(".inputTask")[0].value;
 
-    list.appendChild(li);
+    if (taskTitle != "") {
+        let t = document.createTextNode(taskTitle);
+        li.className = "item";
+        li.appendChild(t);
 
-    addOnClickListeners();
-  } 
+        let span = document.createElement("span");
+        let txt = document.createTextNode("x");
+        span.className = "close";
+        span.appendChild(txt);
+        li.appendChild(span);
+
+        list.appendChild(li);
+
+        addOnClickListeners();
+    }
+}
