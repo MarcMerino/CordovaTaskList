@@ -25,6 +25,10 @@ let addTaskButton = $(".buttonTask").click(function(){
     addTask();
 });
 
+// getStructure();
+
+addTask();
+
 addOnClickListeners();
 
 function getStructure() {
@@ -42,19 +46,18 @@ function addOnClickListeners() {
     });
 }
 
-function addTask(element) {
-    if (element == null) {
-        let value = $(".inputTask")[0].value;
-        if (value != "") {
-            $("ul").append('<li>' + value + '<span class="close">x</span></li>')
-            $("ul").listview('refresh');
+function addTask(element = null) {
+    let value = $(".inputTask")[0].value;
 
-            localStorage.setItem("listEntries", JSON.stringify({"li": $("ul").children().toArray().firstChild.data}))
-
-            addOnClickListeners();
-        }
-    } else {
-        list.appendChild(element);
+    if (element === null && value !== "") {
+        $("ul").append('<li>' + value + '<span class="close">x</span></li>')
+    } else if (element !== null) {
+        $("ul").append('<li>' + element + '<span class="close">x</span></li>')
     }
-    
+
+    $("ul").listview('refresh');
+
+    // localStorage.setItem("listEntries", JSON.stringify({"li": $("ul").children().toArray().firstChild.data}))
+
+    addOnClickListeners();
 }

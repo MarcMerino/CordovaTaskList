@@ -38,19 +38,6 @@
 	<meta name="color-scheme" content="light dark">
 	<link rel="stylesheet" href="css/index.css">
 	<link rel="stylesheet" type="text/css" href="js/jquery-1.5.0.mobile.min.css">
-	<style>
-		/* For avoiding title truncation in wp8 */
-		.ui-header .ui-title {
-			overflow: visible !important;
-		}
-
-		/* For fixing the absolute position issue for the default cordova gen page*/
-		#cjp-accordion1 .app {
-			left: 5px !important;
-			margin: 5px !important;
-			position: relative !important;
-		}
-	</style>
 	<title>Task List</title>
 </head>
 
@@ -58,14 +45,12 @@
 	<!-- page 1 -->
 	<div data-role="page" id="homePage">
 		<div data-role="header">
+			<button type="button" class="buttonTask" id="buttonTask">Añadir tarea</button>
 			<h1>Task List</h1>
 		</div>
-		<form class="form">
-			<button type="button" class="buttonTask" id="buttonTask">Añadir tarea</button>
-			<input class="inputTask" id="inputTask" type="text" placeholder="Tarea" />
-		</form>
+		<input class="inputTask" id="inputTask" type="text" placeholder="Tarea"/>
 		<ul id="list" data-role="listview">
-			<li>Recuperar Android<span class="close">x</span></li>
+			<li>Recuperar Android<span class="close" onclick="closeButton()">x</span></li>
 			<li>Jugar 1 hora a Duolingo como mínimo<span class="close">x</span></li>
 			<li>Subir el repo a github<span class="close">x</span></li>
 			<!-- <li>Leer el pdf de Unity<span class="close">x</span></li> -->
